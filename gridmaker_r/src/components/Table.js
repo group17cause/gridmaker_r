@@ -19,17 +19,26 @@ class Table extends Component {
 
     addColumn = () => {
         this.setState(state => {
-            return {numRows:state.numCols + 1}
+            return {numCols:state.numCols + 1}
         });
     }
 
+    removeRow = () => {
+        return;
+    }
+
+    removeCol = () => {
+        return;
+    }
+    
     handleColorChange = (event) => {
         this.setState({selectedColor: event.target.value});
     }
 
-    handColorApply = (event) => {
+    handleApplyColor = (event) => {
         event.target.style.backgroundColor = this.state.selectedColor;
     }
+
 
     render() {
         let rows = [];
@@ -42,6 +51,8 @@ class Table extends Component {
         <div>
             <button onClick={this.addRow}>Add Row</button>
             <button onClick={this.addColumn}>Add Column</button>
+            <button onClick={this.removeCol}>Remove Column</button>
+            <button onClick={this.removeRow}>Remove Row</button>
             <select onChange={this.handleColorChange}>
             <option value="red">Red</option>
             <option value="blue">Blue</option>

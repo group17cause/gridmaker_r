@@ -18,17 +18,40 @@ class Table extends Component {
     }
 
     addColumn = () => {
+
         this.setState(state => {
             return {numCols:state.numCols + 1}
         });
     }
 
-    removeRow = () => {
-        return;
+     removeRow = () => {
+        if (this.state.numRows === 0)
+        {
+            this.setState(state => {
+                return {numRows:state.numRows = 0}
+            });
+        }
+        else{
+            this.setState(state => {
+                return {numRows:state.numRows - 1}
+            });
+        } 
+
     }
 
     removeCol = () => {
-        return;
+        if (this.state.numCols === 0)
+        {
+            this.setState(state => {
+                return {numCols:state.numCols = 0}
+            });
+        }
+        else{
+            this.setState(state => {
+                return {numCols:state.numCols - 1}
+            });
+        } 
+
     }
     
     handleColorChange = (event) => {
@@ -40,19 +63,24 @@ class Table extends Component {
     }
 
 
-    render() {
+    render() 
+    {
         let rows = [];
 
         for (let i = 0; i < this.state.numRows; i++) {
             rows.push(<TableRow numCols ={this.state.numCols} handleApplyColor = {this.handleApplyColor} />)
         }
-    
+            console.log("rows: " + this.state.numRows + " cols: " + this.state.numCols);
+        
     return (
         <div>
             <button onClick={this.addRow}>Add Row</button>
             <button onClick={this.addColumn}>Add Column</button>
-            <button onClick={this.removeCol}>Remove Column</button>
             <button onClick={this.removeRow}>Remove Row</button>
+            <button onClick={this.removeCol}>Remove Column</button>
+            <button onClick={this.fillU}>Fill All Uncolored</button>
+            <button onClick={this.fill}>Fill</button>
+            <button onClick={this.clearAll}>Clear</button>
             <select onChange={this.handleColorChange}>
             <option value="red">Red</option>
             <option value="blue">Blue</option>
@@ -64,6 +92,7 @@ class Table extends Component {
         </div>
     )
     }
+
 }
 
 export default Table;
